@@ -81,10 +81,8 @@ Eina_Bool data_initialize(void)
 	 * If you need to initialize application data,
 	 * please use this function.
 	 */
-	// commented for Akib
-//	if (data_gps_enabled_get())
-//		_data_distance_tracker_init();
-	_data_distance_tracker_init();
+	if (data_gps_enabled_get())
+		_data_distance_tracker_init();
 
 	return _data_acceleration_sensor_init_handle();
 }
@@ -107,9 +105,7 @@ void data_finalize(void)
  */
 bool data_tracking_start(void)
 {
-//	commented for Akib
-//	if(!initialized && data_gps_enabled_get()){
-	if(!initialized){
+	if(!initialized && data_gps_enabled_get()){
 		bool track = _data_distance_tracker_start();
 		bool accel_sensor = _data_acceleration_sensor_start();
 		s_info.start_time = ecore_time_get();
